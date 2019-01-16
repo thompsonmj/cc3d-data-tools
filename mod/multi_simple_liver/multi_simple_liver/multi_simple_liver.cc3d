@@ -1,0 +1,9 @@
+<Simulation version="3.6.2">
+   <XMLScript Type="XMLScript">Simulation/multi_simple_liver.xml</XMLScript>
+   <PythonScript Type="PythonScript">Simulation/multi_simple_liver.py</PythonScript>
+   <Resource Type="Python">Simulation/multi_simple_liverSteppables.py</Resource>
+   <Resource Type="PythonParamters">Simulation/multi_simple_liver_parameters.py</Resource>
+   <Resource Type="SBML_XML">Simulation/BIOMD0000000619.xml</Resource>
+   <Resource Type="SBML_XML">Simulation/BIOMD0000000624.xml</Resource>
+   <ParameterScan Type="ParameterScan">Simulation/ParameterScanSpecs.xml</ParameterScan>
+</Simulation>

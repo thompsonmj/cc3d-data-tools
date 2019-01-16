@@ -1,0 +1,11 @@
+<CompuCell3DLatticeData Version="1.0">
+   <Dimensions x="100" y="100" z="1"/>
+   <Lattice Type="Square"/>
+   <Output CoreFileName="output" Directory="/home/thompsmj/CompuCell3D/TestSimulationExtInp/OutputMattBrownCluster/Sim_40/output/LatticeData" Frequency="50" NumberOfSteps="800"/>
+   <CellType TypeId="0" TypeName="Medium"/>
+   <CellType TypeId="1" TypeName="CellA"/>
+   <CellType TypeId="2" TypeName="CellB"/>
+   <Fields>
+      <Field Name="Cell_Field" Type="CellField"/>
+   </Fields>
+</CompuCell3DLatticeData>

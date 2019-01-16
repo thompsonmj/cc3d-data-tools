@@ -1,0 +1,3 @@
+totalSimTimeHr,24,,hours,,"8 hours default, in vitro data goes out to 24 hours",
+cc3d_iterODE,1,,unitless,,Number of iterations per MCS on CC3D model ODEs,Best = 5. Default = 1. If five CC3D will divide the transfer ODE calcs into 5 stubsteps
+cc3d_mcs2,,,,,,

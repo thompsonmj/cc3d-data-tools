@@ -1,0 +1,65 @@
+qsub: invalid option -- 'i'
+[exiting]
+
+usage: qsub [-a date_time] [-A account_string] [-b secs]
+    [-c [ none | { enabled | periodic | shutdown |
+    depth=<int> | dir=<path> | interval=<minutes>}... ]
+    [-C directive_prefix] [-d path] [-D path]
+    [-e path] [-h] [-I] [-j oe|eo|n] [-k {oe}] [-l resource_list] [-m n|{abe}]
+    [-M user_list] [-N jobname] [-o path] [-p priority] [-P proxy_user [-J <jobid]]
+    [-q queue] [-r y|n] [-S path] [-t number_to_submit] [-T type]  [-u user_list]
+    [-w] path
+      [-W additional_attributes] [-v variable_list] [-V ] [-x] [-X] [-z] [script]
+
+qsub: invalid option -- 'i'
+[exiting]
+
+usage: qsub [-a date_time] [-A account_string] [-b secs]
+    [-c [ none | { enabled | periodic | shutdown |
+    depth=<int> | dir=<path> | interval=<minutes>}... ]
+    [-C directive_prefix] [-d path] [-D path]
+    [-e path] [-h] [-I] [-j oe|eo|n] [-k {oe}] [-l resource_list] [-m n|{abe}]
+    [-M user_list] [-N jobname] [-o path] [-p priority] [-P proxy_user [-J <jobid]]
+    [-q queue] [-r y|n] [-S path] [-t number_to_submit] [-T type]  [-u user_list]
+    [-w] path
+      [-W additional_attributes] [-v variable_list] [-V ] [-x] [-X] [-z] [script]
+
+qsub: invalid option -- 'i'
+[exiting]
+
+usage: qsub [-a date_time] [-A account_string] [-b secs]
+    [-c [ none | { enabled | periodic | shutdown |
+    depth=<int> | dir=<path> | interval=<minutes>}... ]
+    [-C directive_prefix] [-d path] [-D path]
+    [-e path] [-h] [-I] [-j oe|eo|n] [-k {oe}] [-l resource_list] [-m n|{abe}]
+    [-M user_list] [-N jobname] [-o path] [-p priority] [-P proxy_user [-J <jobid]]
+    [-q queue] [-r y|n] [-S path] [-t number_to_submit] [-T type]  [-u user_list]
+    [-w] path
+      [-W additional_attributes] [-v variable_list] [-V ] [-x] [-X] [-z] [script]
+
+qsub: invalid option -- 'i'
+[exiting]
+
+usage: qsub [-a date_time] [-A account_string] [-b secs]
+    [-c [ none | { enabled | periodic | shutdown |
+    depth=<int> | dir=<path> | interval=<minutes>}... ]
+    [-C directive_prefix] [-d path] [-D path]
+    [-e path] [-h] [-I] [-j oe|eo|n] [-k {oe}] [-l resource_list] [-m n|{abe}]
+    [-M user_list] [-N jobname] [-o path] [-p priority] [-P proxy_user [-J <jobid]]
+    [-q queue] [-r y|n] [-S path] [-t number_to_submit] [-T type]  [-u user_list]
+    [-w] path
+      [-W additional_attributes] [-v variable_list] [-V ] [-x] [-X] [-z] [script]
+
+qsub: invalid option -- 'i'
+[exiting]
+
+usage: qsub [-a date_time] [-A account_string] [-b secs]
+    [-c [ none | { enabled | periodic | shutdown |
+    depth=<int> | dir=<path> | interval=<minutes>}... ]
+    [-C directive_prefix] [-d path] [-D path]
+    [-e path] [-h] [-I] [-j oe|eo|n] [-k {oe}] [-l resource_list] [-m n|{abe}]
+    [-M user_list] [-N jobname] [-o path] [-p priority] [-P proxy_user [-J <jobid]]
+    [-q queue] [-r y|n] [-S path] [-t number_to_submit] [-T type]  [-u user_list]
+    [-w] path
+      [-W additional_attributes] [-v variable_list] [-V ] [-x] [-X] [-z] [script]
+

@@ -1,0 +1,6 @@
+ MCS  Time(hr)  APAP_exp_ug/ml  APAP_calc_ug/ml  APAP_abs_err_ug/ml  APAPS_exp_ug/ml  APAPS_calc_ug/ml  APAPS_abs_err_ug/ml  APAPG_exp_ug/ml  APAPG_calc_ug/ml  APAPG_abs_err_ug/ml  total_err_this_step  cumulative_total_err  RMSeTotal  accumChiSquaredTotal
+      0    0.00          0.00    0.000    0.000          0.00    0.000    0.000          0.00    0.000    0.000         0.000    0.000        0.0000         0.0000
+   1080    0.30          8.94    9.732    0.792          0.76    0.123    0.637          0.33    0.032    0.298         1.727    1.727        0.4323         0.8733
+   1800    0.50         14.67   12.892    1.778          1.97    0.594    1.376          1.75    0.178    1.572         4.726    6.452        0.9801         3.4621
+   2700    0.75         16.77   14.703    2.067          2.96    1.299    1.661          3.65    0.442    3.208         6.936   13.388        1.4711         7.4681
+   3600    1.00         16.63   15.597    1.033          3.41    2.104    1.306          4.71    0.811    3.899         6.239   19.627        1.7116        11.2605

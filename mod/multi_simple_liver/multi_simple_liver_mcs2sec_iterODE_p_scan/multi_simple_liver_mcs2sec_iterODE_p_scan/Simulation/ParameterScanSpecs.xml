@@ -1,0 +1,11 @@
+<ParameterScan version="3.7.0">
+   <OutputDirectory>Multi_simple_liver_mcs2sec_iterODE_p_scan_ParameterScan</OutputDirectory>
+   <ParameterList Resource="Simulation/Multi_simple_liver_parameters.py">
+      <Parameter CurrentIteration="1" Name="cc3d_iterODE" Type="PYTHON_GLOBAL" ValueType="int">
+         <Values>1,5,10</Values>
+      </Parameter>
+      <Parameter CurrentIteration="0" Name="cc3d_mcs2second" Type="PYTHON_GLOBAL" ValueType="float">
+         <Values>0.1,0.5,1.0</Values>
+      </Parameter>
+   </ParameterList>
+</ParameterScan>

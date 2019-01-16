@@ -1,0 +1,81 @@
+#!/bin/sh -l
+#PBS -q debug
+#PBS -l nodes=1:ppn=24
+#PBS -l walltime=00:30:00
+#PBS -l naccesspolicy=shared
+#PBS -N JOBNAME_PLACEHOLDER
+#PBS -o /scratch/brown/thompsmj/$PBS_JOBNAME/$PBS_JOBID/
+#PBS -e /scratch/brown/thompsmj/$PBS_JOBNAME/$PBS_JOBID/
+
+echo ------------------------------------------------------
+echo 'Job is running on node(s):'
+cat $PBS_NODEFILE | sort -u
+echo " "
+echo Cores per node: $PBS_NUM_PPN
+echo ------------------------------------------------------
+echo -e PBS: job name is: 	  '\t\t\t\t'$PBS_JOBNAME
+echo -e PBS: job identifier is:   '\t\t'$PBS_JOBID
+echo -e PBS: qsub is running on:  '\t\t'$PBS_O_HOST
+echo -e PBS: originating queue is:'\t\t'$PBS_O_QUEUE
+echo -e PBS: executing queue is:  '\t\t'$PBS_QUEUE
+echo -e PBS: working directory is:'\t\t'$PBS_O_WORKDIR
+echo -e PBS: execution mode is:   '\t\t'$PBS_ENVIRONMENT
+echo -e PBS: node file is: 	  '\t\t\t\t'$PBS_NODEFILE
+echo -e PBS: current home directory is: $PBS_O_HOME
+echo -e PBS: PATH =		'\t\t\t\t\t'$PBS_O_PATH
+echo ------------------------------------------------------
+
+## SETUP
+# Setup MATLAB and update path
+module load matlab
+cd /depot/dumulis/cc3d/apps/CC3D_v377/_matlab/dev
+matlab -nojvm -nodisplay -nosplash -r updatesessionpath
+cd -
+
+# Specify job-specific variables.
+projName=multi_simple_liver	# Unique name for this project (must match cc3d simulation filename).	# < User-defined
+cc3dSimFile=$projName.cc3d
+projDir=/depot/dumulis/cc3d/apps/CC3D_v377/_models/$projName
+parFileDir=\'$projDir\'
+
+echo Running job from file: $PBS_O_WIRKDIR/$projName.job
+
+echo " "
+date +"%d %B %Y"
+date +"%H:%M:%S"
+
+## 1) CREATE SPARSE GRID PARAMETER .CSV FILE.
+
+echo " "
+echo Creating parameter sparse grid file ...
+
+
+# Pass parameter file directory and project name to MATLAB script.
+echo " "
+matlab -nojvm -nodisplay -nosplash -r "parsgmain($parFileDir)"
+
+echo " "
+date +"%d %B %Y"
+date +"%H:%M:%S"
+
+## 2) RUN CC3D SIMULATIONS.
+
+echo " "
+echo Running CompuCell3D simulations ...
+# Set environment variables for CLI arguments
+
+##if [ ! -d "$RCAC_SCRATCH/$projName" ]; then mkdir $RCAC_SCRATCH/$projName; fi
+
+mkdir $RCAC_SCRATCH/$projName/$PBS_JOBID
+cc3dSimFilePath=/depot/dumulis/cc3d/apps/CC3D_v377/_models/multi_simple_liver/multi_simple_liver.cc3d
+jobOutDir=$RCAC_SCRATCH/$projName/$PBS_JOBID
+parFileSG=/depot/dumulis/cc3d/apps/CC3D_v377/_models/multi_simple_liver/par_multi_simple_liver_sgL3.csv #<<< NEEDS FIXED FOR par_<jobname>_sgL#.csv
+
+# Call CC3D CLI with -i input, -o output, -p parameters, and -f frequency arguments.
+cd /depot/dumulis/cc3d/apps/CC3D_v377/CLI
+python CompuCell3DCLI.py -i $cc3dSimFilePath -o $jobOutDir -p $parFileSG -f 50
+# Note: python cmd calls local python 2.7 in CC3D package, not cluster version
+
+
+
+#1> /scratch/brown/$USER/$projName/$PBS_JOBID/ 2> /scratch/brown/$USER/$projName/$PBS_JOBID/

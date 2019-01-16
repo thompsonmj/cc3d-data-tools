@@ -1,0 +1,37 @@
+<CompuCell3D Revision="20170130" Version="3.7.7">
+   
+   <Potts>
+      <!-- Basic properties of CPM (GGH) algorithm -->
+      <Dimensions x="4" y="20" z="1"/>
+      <Steps>28801</Steps>  <!-- add 1! 28800 mcs = 8 hours assuming a one second MCS, 86400=24hrs, 43200=12hrs -->
+      <Temperature>10.0</Temperature>
+      <NeighborOrder>1</NeighborOrder>
+   </Potts>
+   
+   <Metadata>
+      <DebugOutputFrequency>500</DebugOutputFrequency>
+      <NumberOfProcessors>2</NumberOfProcessors>
+   </Metadata>
+   
+   <Plugin Name="CellType">
+      <!-- Listing all cell types in the simulation -->
+      <CellType TypeId="0" TypeName="Medium"/>
+      <CellType TypeId="1" TypeName="Blood"      Freeze=""/>
+      <CellType TypeId="2" TypeName="Hepatocyte" Freeze=""/>
+   </Plugin>
+   
+   <Plugin Name="Volume">
+      <VolumeEnergyParameters CellType="Blood"      LambdaVolume="2.0" TargetVolume="200"/>
+      <VolumeEnergyParameters CellType="Hepatocyte" LambdaVolume="2.0" TargetVolume="400"/>
+   </Plugin>
+   
+<!--    <Plugin Name="Surface"> -->
+<!--       <SurfaceEnergyParameters CellType="Blood"      LambdaSurface="2.0" TargetSurface="60"/> -->
+<!--       <SurfaceEnergyParameters CellType="Hepatocyte" LambdaSurface="2.0" TargetSurface="80"/> -->
+<!--    </Plugin> -->
+   
+<!--    <Plugin Name="CenterOfMass"> -->
+       <!-- Module tracking center of mass of each cell --> 
+<!--    </Plugin> -->
+   
+</CompuCell3D>

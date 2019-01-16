@@ -1,0 +1,4 @@
+<Simulation version="3.6.2">
+   <PythonScript Type="PythonScript">Simulation/TestSimulation1.py</PythonScript>
+   <Resource Type="Python">Simulation/TestSimulation1Steppables.py</Resource>
+</Simulation>

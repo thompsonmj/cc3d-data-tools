@@ -1,0 +1,50 @@
+#!/bin/sh -l
+
+## PBS Directive Argument Options
+# -N <jobName>			Custom job name.
+# -q <queue>			Specify queue.
+# -o <pathToOutputFile>		Specify job output file.
+# -e <pathToErrorFile> 		Specify job error file.
+# -l <arguments>		Node access policy.
+#				Arguments (no spaces):
+#					nodes=<nNodes>:ppn=<processorsPerNode>,
+#					walltime=<hh:mm:ss>, (default: 00:30:00)
+#					naccesspolicy='shared'/'singleuser'/'singlejob'
+#						'shared': for lots of small jobs needing little memory
+# 						'singleuser': for lots of small jobs packed densely on 1+ nodes
+#						'singlejob': (default) for wide jobs or jobs using a lot of memory
+#
+# -n				Request exclusive access to the node.
+
+## Job submission file
+# FILENAME:	multi_simple_liver_sg.sub
+
+#PBS -q dumulis
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=00:01:00
+#PBS -l naccesspolicy=shared
+#PBS -N test
+
+module purge
+module load matlab
+
+## Create sparse grid paramter .csv file
+# Set environment variables for MATLAB sparse grid program and run.
+CC3D_SIM=/depot/dumulis/cc3d/apps/CC3D_v377/_models/test
+SG=/depot/dumulis/cc3d/apps/CC3D_v377/_matlab
+matlab -sd $SG -r main($CC3D_SIM)
+
+### Run CC3D simulations
+## Set environment variables for CLI arguments
+#SIM=/depot/dumulis/cc3d/apps/CC3D_v377/_models/multi_simple_liver/sim/-l__filename.cc3d__
+#OUT=/scratch/brown/thompsmj/multi_simple_liver/test_job_out
+#SGPAR=/depot/dumulis/cc3d/apps/CC3D_v377/_models/multi_simple_liver/sg_par.csv
+#
+## Call CC3D CLI with -i input, -o output, -p parameters, and -f frequency arguments.
+#
+#python CompuCell3DCLI.py -i $SIM -o $OUT -p $SGPAR -f 10
+# Note: in previously run sims, path was /home/thompsomj/CompuCell3D/CC3D_v377/CLI/CompuCell3DCLI.py
+# Try ../../cc3d_v377/CLI/CompuCell3DCLI.py to run from data depot - and make a repository for this version as well.
+#
+## Note: python command calls local 2.7 version of python in CC3D package, not the cluster version
+#

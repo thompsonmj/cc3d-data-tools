@@ -1,0 +1,53 @@
+#!/bin/sh -l
+
+## PBS directives
+#PBS -q debug
+#PBS -l nodes=1:ppn=24
+#PBS -l walltime=00:29:00
+#PBS -l naccesspolicy=shared
+#PBS -N jobname
+##pee-bee-ess -o $RCAC_SCRATCH/$PROJ_NAME/$PBS_JOBID
+##pee-bee-ess -e $RCAC_SCRATCH/$PROJ_NAME/$PBS_JOBID
+
+module load matlab
+
+PROJ_NAME=TestSimulationExtInp	# Unique name for this project.						# < User-defined
+CCSIM=TestSimulation1.cc3d		# CompuCell3D simulation filename. 					# < User-defined
+
+echo Running job from file: $PBS_O_WIRKDIR/$PROJ_NAME.sub
+
+echo " "
+date +"%d %B %Y %H:%M:%S"
+
+## 1.   Create sparse grid parameter .csv file
+echo " "
+echo Creating parameter sparse grid file ...
+SD=/depot/dumulis/cc3d/apps/CC3D_v377/_matlab				# Starting directory.
+PD=/depot/dumulis/cc3d/apps/CC3D_v377/_models/$PROJ_NAME	# Project directory.
+PAR=\'$PD\'													# Parameter file directory.
+# Pass parameter file directory and project name to MATLAB script.
+matlab -nodisplay -sd $SD -r "main($PAR)" -wait
+
+echo " "
+date +"%d %B %Y %H:%M:%S"
+
+## 2.   Run CC3D simulations
+echo " "
+echo Running CompuCell3D simulations ...
+# Set environment variables for CLI arguments
+SIM=$PD/$CCSIM												# CompuCell3D .cc3d directory.
+# Create new directory for this job's output.
+if [ ! -d "$RCAC_SCRATCH/$PROJ_NAME" ]; then mkdir $RCAC_SCRATCH/$PROJ_NAME; fi
+mkdir $RCAC_SCRATCH/$PROJ_NAME/$PBS_JOBID
+OUT=$RCAC_SCRATCH/$PROJ_NAME/$PBS_JOBID
+PARSG=$PD/par_sg.csv
+
+# Call CC3D CLI with -i input, -o output, -p parameters, and -f frequency arguments.
+cd /depot/dumulis/cc3d/apps/CC3D_v377/CLI
+python CompuCell3DCLI.py -i $SIM -o $OUT -p $PARSG -f 1 
+# Note: python cmd calls local python 2.7 in CC3D package, not cluster version
+
+echo " "
+date +"%d %B %Y %H:%M:%S"
+
+## 3.   Post-processing

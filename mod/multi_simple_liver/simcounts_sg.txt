@@ -1,0 +1,14 @@
+My sparse grids
+sgL3:  4985 sims
+sgL4: 31881 sims
+
+Jim's particle swarm:
+12 simulated hours
+10 parameters
+4 swarms
+30 particles/swarm
+200 iterations
+24,000 simulations (4·30·200)
+Each CC3D run took 20 seconds (using 2 threads)
+Total run time ~20 hours
+(Slurm setup limited to 8 simultaneous jobs)

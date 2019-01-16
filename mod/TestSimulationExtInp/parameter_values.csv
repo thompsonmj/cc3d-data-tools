@@ -1,0 +1,6 @@
+sim_id,temperature,totalNumberOfMCS,neighborOrder,medium_medium,medium_cellA,medium_cellB,cellA_cellA,cellA_cellB,cellB_cellB
+Sim_10,10,500,1,10,2,4,5,6,7
+Sim_20,20,600,1,20,2,4,5,6,6
+Sim_30,30,700,2,30,2,4,5,7,9
+Sim_40,40,800,3,40,2,4,5,7.333333333,11
+Sim_50,50,900,2,50,2,4,5,7.833333333,12

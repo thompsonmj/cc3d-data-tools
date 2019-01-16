@@ -1,0 +1,10 @@
+par1,1.00E-05,1.00E-04,par1 units,par1 notes
+par2,1.00E-04,1.00E-03,par2 units,
+par3,1.00E-03,1.00E-02,par3 units,
+par4,1.00E-02,1.00E-01,par4 units,
+par5,1.00E-01,1,par5 units,par5 notes
+par6,1,10,par6 units,par6 notes
+par7,10,100,par7 units,
+par8,100,1.00E+03,par8 units,par8 notes
+par9,1.00E+03,10000,par9 units,par9 notes
+par10,1.00E-05,1.00E+04,par10 units,par10 notes

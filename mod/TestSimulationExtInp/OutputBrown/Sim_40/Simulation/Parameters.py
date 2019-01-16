@@ -1,0 +1,10 @@
+sim_id = 'Sim_40'
+temperature = 40
+totalNumberOfMCS = 800
+neighborOrder = 3
+medium_medium = 40
+medium_cellA = 2
+medium_cellB = 4
+cellA_cellA = 5
+cellA_cellB = 7.333333333
+cellB_cellB = 11

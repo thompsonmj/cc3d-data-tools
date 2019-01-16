@@ -1,0 +1,85 @@
+#!/bin/sh -l
+#PBS -q debug
+#PBS -l nodes=1:ppn=20
+#PBS -l walltime=00:05:00
+#PBS -l naccesspolicy=shared
+#PBS -N multi_simple_liver
+#PBS -o /scratch/scholar/t/thompsmj/$PBS_JOBNAME/$PBS_JOBID/
+#PBS -e /scratch/scholar/t/thompsmj/$PBS_JOBNAME/$PBS_JOBID/
+
+echo ------------------------------------------------------
+echo 'Job is running on node(s):'
+cat $PBS_NODEFILE | sort -u
+echo " "
+echo Cores per node: $PBS_NUM_PPN
+echo ------------------------------------------------------
+echo -e PBS: job name is: 	  '\t\t\t\t'$PBS_JOBNAME
+echo -e PBS: job identifier is:   '\t\t'$PBS_JOBID
+echo -e PBS: qsub is running on:  '\t\t'$PBS_O_HOST
+echo -e PBS: originating queue is:'\t\t'$PBS_O_QUEUE
+echo -e PBS: executing queue is:  '\t\t'$PBS_QUEUE
+echo -e PBS: working directory is:'\t\t'$PBS_O_WORKDIR
+echo -e PBS: execution mode is:   '\t\t'$PBS_ENVIRONMENT
+echo -e PBS: node file is: 	  '\t\t\t\t'$PBS_NODEFILE
+echo -e PBS: current home directory is: $PBS_O_HOME
+echo -e PBS: PATH =		'\t\t\t\t\t'$PBS_O_PATH
+echo ------------------------------------------------------
+
+module load matlab
+
+PROJ_NAME=multi_simple_liver			# Unique name for this project.						# < User-defined
+CCSIM=$PROJ_NAME.cc3d					# CompuCell3D simulation filename. 					# < User-defined
+
+echo Running job from file: $PBS_O_WIRKDIR/$PROJ_NAME.job
+
+echo " "
+date +"%d %B %Y"
+date +"%H:%M:%S"
+
+## 1.   Create sparse grid parameter .csv file
+echo " "
+echo Creating parameter sparse grid file ...
+
+SD=/depot/dumulis/cc3d/apps/CC3D_v377/_matlab				# Starting directory.
+PD=/depot/dumulis/cc3d/apps/CC3D_v377/_models/$PROJ_NAME	# Project directory.
+PAR=\'$PD\'													# Parameter file directory.
+# Pass parameter file directory and project name to MATLAB script.
+echo " "
+pushd $SD
+matlab -nodisplay -sd $SD -r "main($PAR)"
+popd
+
+echo " "
+date +"%d %B %Y"
+date +"%H:%M:%S"
+
+## 2.   Run CC3D simulations
+echo " "
+echo Running CompuCell3D simulations ...
+# Set environment variables for CLI arguments
+#####SIM=$PD/$CCSIM												# CompuCell3D .cc3d directory.
+###### Create new directory for this job's output.
+#####if [ ! -d "$RCAC_SCRATCH/$PROJ_NAME" ]; then mkdir $RCAC_SCRATCH/$PROJ_NAME; fi
+#####mkdir $RCAC_SCRATCH/$PROJ_NAME/$PBS_JOBID
+#####OUT=$RCAC_SCRATCH/$PROJ_NAME/$PBS_JOBID
+#####PARSG=$PD/par_$PROJ_NAME_sgL2.csv  #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< NEEDS FIXED FOR par_<jobname>_sgL#.csv
+
+mkdir $RCAC_SCRATCH/$PROJ_NAME/$PBS_JOBID
+SIM=/depot/dumulis/cc3d/apps/CC3D_v377/_models/multi_simple_liver/multi_simple_liver.cc3d
+OUT=$RCAC_SCRATCH/$PROJ_NAME/$PBS_JOBID
+PARSG=/depot/dumulis/cc3d/apps/CC3D_v377/_models/multi_simple_liver/par_multi_simple_liver_sgL2.csv
+
+# Call CC3D CLI with -i input, -o output, -p parameters, and -f frequency arguments.
+cd /depot/dumulis/cc3d/apps/CC3D_v377/CLI
+python CompuCell3DCLI.py -i $SIM -o $OUT -p $PARSG -f 50
+# Note: python cmd calls local python 2.7 in CC3D package, not cluster version
+
+echo " "
+date +"%d %B %Y"
+date +"%H:%M:%S"
+
+## 3.   Post-processing
+
+
+
+#1> /scratch/brown/$USER/$PROJ_NAME/$PBS_JOBID/ 2> /scratch/brown/$USER/$PROJ_NAME/$PBS_JOBID/

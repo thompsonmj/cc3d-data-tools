@@ -1,0 +1,35 @@
+#!/bin/sh -l
+
+## Job submission file
+# FILENAME:	TestSimulationExtInp.job
+
+#PBS -q debug
+#PBS -l nodes=1:ppn=24
+#PBS -l walltime=00:10:00
+#PBS -l naccesspolicy=shared
+#PBS -N TestSimulationExtInp
+
+#module purge
+module load matlab
+
+PROJ_NAME=TestSimulationExtInp
+
+## Create sparse grid paramter .csv file
+# Set environment variables for MATLAB sparse grid program and run.
+#CC3D_SIM=/depot/dumulis/cc3d/apps/CC3D_v377/_models/TestSimulationExtInp
+SD=/depot/dumulis/cc3d/apps/CC3D_v377/_matlab				# Starting directory.
+PD=/depot/dumulis/cc3d/apps/CC3D_v377/_models/$PROJ_NAME	# Project directory.
+PAR=\'$PD\'		
+matlab -nodisplay -sd $SD -r "main($PAR)" -wait
+
+## Run CC3D simulations
+# Set environment variables for CLI arguments
+SIM=/depot/dumulis/cc3d/apps/CC3D_v377/_models/TestSimulationExtInp/TestSimulation1.cc3d
+OUT=/scratch/brown/thompsmj/TestSimulationExtInp/test_job_out
+PARSG=/depot/dumulis/cc3d/apps/CC3D_v377/_models/TestSimulationExtInp/par_sg.csv
+
+# Call CC3D CLI with -i input, -o output, -p parameters, and -f frequency arguments.
+cd /depot/dumulis/cc3d/apps/CC3D_v377/CLI
+python CompuCell3DCLI.py -i $SIM -o $OUT -p $PARSG -f 10
+# Note: python command calls local 2.7 version of python in CC3D package, not the cluster version
+

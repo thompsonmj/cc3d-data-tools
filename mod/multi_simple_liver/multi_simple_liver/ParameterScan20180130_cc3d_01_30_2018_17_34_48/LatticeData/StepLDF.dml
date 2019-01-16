@@ -1,0 +1,14 @@
+<CompuCell3DLatticeData Version="1.0">
+   <Dimensions x="4" y="20" z="1"/>
+   <Lattice Type="Square"/>
+   <Output CoreFileName="Step" Directory="C:\Users\James Sluka\Desktop\Small Code Projects\Multi_simple_liver\Multi_simple_liver\Multi_simple_liver\ParameterScan20180130_cc3d_01_30_2018_17_34_48\LatticeData" Frequency="1" NumberOfSteps="43201"/>
+   <CellType TypeId="0" TypeName="Medium"/>
+   <CellType TypeId="1" TypeName="Blood"/>
+   <CellType TypeId="2" TypeName="Hepatocyte"/>
+   <Fields>
+      <Field Name="APAPG" Type="ScalarFieldCellLevel"/>
+      <Field Name="Cell_Field" Type="CellField"/>
+      <Field Name="APAP" Type="ScalarFieldCellLevel"/>
+      <Field Name="APAPS" Type="ScalarFieldCellLevel"/>
+   </Fields>
+</CompuCell3DLatticeData>

@@ -1,0 +1,9 @@
+temperature,10,50
+totalNumberOfMCS,500,900
+neighborOrder,1,3
+medium_medium,10,50
+medium_cellA,2,
+medium_cellB,4,
+cellA_cellA,5,
+cellA_cellB,6,7.833333333
+cellB_cellB,7,12
